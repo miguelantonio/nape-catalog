@@ -16,7 +16,7 @@ def evaluate(evidence):
         violence_next_section_start = document_text.find("\n\n", criminal_history_start)
 
         # Extract the "Criminal History" section
-        if criminal_history_start == -1 OR violence_criminal_history_start == -1:
+        if criminal_history_start == -1 or violence_criminal_history_start == -1:
             return "inconclusive", "Either the 'REGISTRO GENERAL DE CONDENAS' section or the special 'VIOLENCIA INTRAFAMILIAR' section cannot be found."
         
         if next_section_start == -1:
@@ -30,7 +30,7 @@ def evaluate(evidence):
             violence_criminal_history_section = document_text[violence_criminal_history_start:violence_next_section_start]
 
         # Determine the outcome based on the content of the "REGISTRO GENERAL DE CONDENAS" and "VIOLENCIA INTRAFAMILIAR" section
-        if "SIN ANTECEDENTESPARTICULARES" in criminal_history_section AND "SIN ANOTACIONESPARTICULARES" in violence_criminal_history_section:
+        if "SIN ANTECEDENTESPARTICULARES" in criminal_history_section and "SIN ANOTACIONESPARTICULARES" in violence_criminal_history_section:
             return "pass", "The evidence contains the expected statements: 'SIN ANTECEDENTESPARTICULARES' and 'SIN ANOTACIONESPARTICULARES'."
         elif "No criminal records found" not in criminal_history_section:
             return "fail", "The evidence does not contain either of these expected statements: 'SIN ANTECEDENTESPARTICULARES' or 'SIN ANOTACIONESPARTICULARES'."
